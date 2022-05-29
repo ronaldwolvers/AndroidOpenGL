@@ -1,4 +1,4 @@
-package com.androidopengl.myapplication
+package com.androidopengl.app
 
 import org.junit.Test
 
