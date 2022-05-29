@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AndroidOpenGL</string>
+    <string name="move_your_position_over_the_surface_below_to_move_one_of_the_triangles">Move your finger over the surface below to move one of the triangles</string>
 </resources>
