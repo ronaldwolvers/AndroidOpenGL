@@ -2,7 +2,6 @@ package com.androidopengl.app
 
 import android.content.Context
 import android.opengl.*
-import android.opengl.GLES10.*
 import android.os.SystemClock
 import android.util.AttributeSet
 import android.util.Log
@@ -114,7 +113,7 @@ open class MyRenderer : GLSurfaceView.Renderer {
             useMvpMatrix = true, color = floatArrayOf(1.0F, 0.0F, 0.0F, 0.5F),
             coords =
             floatArrayOf(
-                0.0f, 0.3008459f, 0.0f,       // top
+                0.0f, 0.3008459f, 0.0f,         // top
                 -0.3f, -0.111004243f, 0.0f,     // bottom left
                 0.3f, -0.111004243f, 0.0f       // bottom right
             )

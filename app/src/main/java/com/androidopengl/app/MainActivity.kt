@@ -13,10 +13,22 @@ enum class RenderMode(val renderMode: Int) {
 val renderMode: RenderMode = RenderMode.RENDERMODE_CONTINUOUSLY
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var glSurfaceView: MyGLSurfaceView
+    private lateinit var myRenderer: MyRenderer
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        glSurfaceView = findViewById(R.id.gl_surface_view)
 
+        if (glSurfaceView.getRenderer() == null) {
+            myRenderer = MyRenderer()
+            glSurfaceView.setRenderer(myRenderer)
+        }
+
+        // Render the view only when there is a change in the drawing data
+        glSurfaceView.renderMode = renderMode.renderMode
     }
 }
