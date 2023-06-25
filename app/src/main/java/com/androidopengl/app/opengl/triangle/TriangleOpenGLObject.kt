@@ -10,7 +10,7 @@ import com.androidopengl.app.opengl.COORDINATES_PER_VERTEX
 import com.androidopengl.app.opengl.OpenGLObject
 
 class TriangleOpenGLObject(
-    private val context: Context,
+    private val context: Context? = null,
     private val color: FloatArray,
     coordinates: FloatArray
 ) : OpenGLObject(coordinates, context) {

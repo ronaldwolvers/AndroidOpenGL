@@ -7,16 +7,23 @@ import android.opengl.Matrix
 import android.os.SystemClock
 import android.util.AttributeSet
 import android.view.MotionEvent
+import androidx.core.content.ContextCompat
+import com.androidopengl.app.opengl.triangle.TriangleOpenGLObject
+import com.androidopengl.app.utils.colorToFloatArray
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 class MyGLSurfaceView : GLSurfaceView {
 
+    private var context: Context? = null
+
     constructor(context: Context) : super(context) {
+        this.context = context
         logEvent("MyGLSurfaceView(context) is being called...")
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+        this.context = context
         logEvent("MyGLSurfaceView(context, attrs) is being called...")
     }
 
@@ -26,6 +33,9 @@ class MyGLSurfaceView : GLSurfaceView {
 
         renderer?.let {
             this.renderer = it
+            if (renderer is MyRenderer) {
+                renderer.context = context
+            }
         }
 
         super.setRenderer(renderer)
@@ -97,9 +107,12 @@ open class MyRenderer : GLSurfaceView.Renderer {
             field = value
         }
 
+    var context: Context? = null
+
     private lateinit var mTriangle: Triangle
     private lateinit var mTriangle2: Triangle
     private lateinit var mTriangle3: Triangle
+    private var mTriangle4: TriangleOpenGLObject? = null
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig) {
 
@@ -119,6 +132,13 @@ open class MyRenderer : GLSurfaceView.Renderer {
                 0.3f, -0.111004243f, 0.0f       // bottom right
             )
         )
+        context?.let {
+            mTriangle4 = TriangleOpenGLObject(context, ContextCompat.getColor(it, R.color.blue).colorToFloatArray(), floatArrayOf(
+                0.5f, 0.5f, 0.0f,               // top
+                0.4f, 0.4f, 0.0f,               // bottom left
+                0.5f, 0.4f, 0.0f                // bottom right
+            ))
+        }
     }
 
     // vPMatrix is an abbreviation for "Model View Projection Matrix"
@@ -179,5 +199,6 @@ open class MyRenderer : GLSurfaceView.Renderer {
         mTriangle2.draw()
         mTriangle.draw(scratch)
         mTriangle3.draw(scratch2)
+        mTriangle4?.draw(vPMatrix)
     }
 }

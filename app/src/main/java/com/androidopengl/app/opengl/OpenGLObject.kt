@@ -15,7 +15,7 @@ const val TEXTURE_COORDINATES_PER_VERTEX = 2
 
 abstract class OpenGLObject(
     private val coordinates: FloatArray,
-    private val context: Context
+    private val context: Context? = null
 ) {
 
     val vertexStride: Int = COORDINATES_PER_VERTEX * 4
@@ -52,7 +52,7 @@ abstract class OpenGLObject(
     fun loadTexture(textureResourceId: Int): Int {
         val textureHandles = IntArray(1)
         GLES20.glGenTextures(1, textureHandles, 0)
-        if (textureHandles[0] != 0) {
+        if (context != null && textureHandles[0] != 0) {
             val bitmapFactoryOptions = BitmapFactory.Options()
             bitmapFactoryOptions.inScaled = false
             val bitmap = BitmapFactory.decodeResource(
