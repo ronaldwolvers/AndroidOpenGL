@@ -1,10 +1,11 @@
 package com.androidopengl.app
 
 import android.content.Context
-import android.opengl.*
+import android.opengl.GLES20
+import android.opengl.GLSurfaceView
+import android.opengl.Matrix
 import android.os.SystemClock
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
@@ -12,11 +13,11 @@ import javax.microedition.khronos.opengles.GL10
 class MyGLSurfaceView : GLSurfaceView {
 
     constructor(context: Context) : super(context) {
-        Log.d("AndroidOpenGL", "MyGLSurfaceView(context) is being called...")
+        logEvent("MyGLSurfaceView(context) is being called...")
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        Log.d("AndroidOpenGL", "MyGLSurfaceView(context, attrs) is being called...")
+        logEvent("MyGLSurfaceView(context, attrs) is being called...")
     }
 
     private var renderer: Renderer? = null
@@ -36,7 +37,7 @@ class MyGLSurfaceView : GLSurfaceView {
 
     init {
 
-        Log.d("AndroidOpenGL", "MyGLSurfaceView.init is being called...")
+        logEvent("MyGLSurfaceView.init is being called...")
 
         // Create an OpenGL ES 2.0 context
         setEGLContextClientVersion(2)
@@ -49,7 +50,7 @@ class MyGLSurfaceView : GLSurfaceView {
 
     override fun onTouchEvent(e: MotionEvent): Boolean {
 
-        Log.d("AndroidOpenGL", "MyGLSurfaceView.onTouchEvent() is being called...")
+        logEvent( "MyGLSurfaceView.onTouchEvent() is being called...")
 
         // MotionEvent reports input details from the touch screen
         // and other input controls. In this case, you are only
@@ -92,7 +93,7 @@ open class MyRenderer : GLSurfaceView.Renderer {
     @Volatile
     var angle: Float = 0f
         set(value) {
-            Log.d("AndroidOpenGL", "angle is being set to: $value")
+            logEvent("`angle` in MyRenderer is being set to: $value")
             field = value
         }
 
@@ -102,7 +103,7 @@ open class MyRenderer : GLSurfaceView.Renderer {
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig) {
 
-        Log.d("AndroidOpenGL", "onSurfaceCreated() is being called...")
+        logEvent("onSurfaceCreated() is being called...")
 
         // Set the background frame color
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
@@ -129,7 +130,7 @@ open class MyRenderer : GLSurfaceView.Renderer {
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
 
-        Log.d("AndroidOpenGL", "onSurfaceChanged() is being called...")
+        logEvent("onSurfaceChanged() is being called...")
 
         GLES20.glViewport(0, 0, width, height)
 
@@ -142,7 +143,7 @@ open class MyRenderer : GLSurfaceView.Renderer {
 
     override fun onDrawFrame(gl: GL10) {
 
-        Log.d("AndroidOpenGL", "onDrawFrame() is being called...")
+        logEvent( "onDrawFrame() is being called...")
 
         // Redraw background color
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)
@@ -157,8 +158,7 @@ open class MyRenderer : GLSurfaceView.Renderer {
         val time = SystemClock.uptimeMillis() % 4000L
         val angleInTime = 0.090f * time.toInt()
 
-        Log.d(
-            "AndroidOpenGL", "creating a rotation matrix...\n" +
+        logEvent("Creating a rotation matrix...\n" +
                     "time: $time\n" +
                     "angle: $angleInTime"
         )
