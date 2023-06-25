@@ -148,17 +148,20 @@ open class MyRenderer : GLSurfaceView.Renderer {
     private val rotationMatrix = FloatArray(16)
     private val rotationMatrix2 = FloatArray(16)
 
+    var frustumNearF: Float? = null
+    var frustumFarF: Float? = null
+
+    private var ratio: Float? = null
+
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
 
         logEvent("onSurfaceChanged() is being called...")
 
         GLES20.glViewport(0, 0, width, height)
 
-        val ratio: Float = width.toFloat() / height.toFloat()
-
-        // this projection matrix is applied to object coordinates
-        // in the onDrawFrame() method
-        Matrix.frustumM(projectionMatrix, 0, -ratio, ratio, -1f, 1f, 3f, 7f)
+        if (height != 0) {
+            ratio = width.toFloat() / height.toFloat()
+        }
     }
 
     override fun onDrawFrame(gl: GL10) {
@@ -167,6 +170,19 @@ open class MyRenderer : GLSurfaceView.Renderer {
 
         // Redraw background color
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)
+
+        if (ratio != null) {
+            Matrix.frustumM(
+                projectionMatrix,
+                0,
+                -ratio!!,
+                ratio!!,
+                -1f,
+                1f,
+                frustumNearF ?: 3f,
+                frustumFarF ?: 7f
+            )
+        }
 
         // Set the camera position (View matrix)
         Matrix.setLookAtM(viewMatrix, 0, 0f, 0f, 3f, 0f, 0f, 0f, 0f, 1.0f, 0.0f)
@@ -196,9 +212,9 @@ open class MyRenderer : GLSurfaceView.Renderer {
         val scratch2 = FloatArray(16)
         Matrix.multiplyMM(scratch2, 0, vPMatrix, 0, rotationMatrix2, 0)
 
-        mTriangle2.draw()
-        mTriangle.draw(scratch)
-        mTriangle3.draw(scratch2)
-        mTriangle4?.draw(scratch)
+//        mTriangle2.draw()
+//        mTriangle.draw(scratch)
+//        mTriangle3.draw(scratch2)
+        mTriangle4?.draw(vPMatrix)
     }
 }
