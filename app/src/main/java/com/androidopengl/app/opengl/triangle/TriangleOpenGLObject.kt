@@ -9,7 +9,11 @@ import com.androidopengl.app.logEvent
 import com.androidopengl.app.opengl.COORDINATES_PER_VERTEX
 import com.androidopengl.app.opengl.OpenGLObject
 
-class TriangleOpenGLObject(private val context: Context, private val color: FloatArray, coordinates: FloatArray): OpenGLObject (coordinates, context) {
+class TriangleOpenGLObject(
+    private val context: Context,
+    private val color: FloatArray,
+    coordinates: FloatArray
+) : OpenGLObject(coordinates, context) {
 
     private var programHandle: Int = -1
 
@@ -18,11 +22,13 @@ class TriangleOpenGLObject(private val context: Context, private val color: Floa
     }
 
     override fun createProgram() {
-        val fragmentShaderHandle = loadShaderFromFile(context,
+        val fragmentShaderHandle = loadShaderFromFile(
+            context,
             GLES20.GL_FRAGMENT_SHADER, "shaders/triangle/triangle.fshader"
         )
 
-        val vertexShaderHandle = loadShaderFromFile(context,
+        val vertexShaderHandle = loadShaderFromFile(
+            context,
             GLES20.GL_VERTEX_SHADER, "shaders/triangle/triangle.vshader"
         )
 
