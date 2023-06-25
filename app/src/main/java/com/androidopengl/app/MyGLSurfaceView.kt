@@ -149,6 +149,7 @@ open class MyRenderer : GLSurfaceView.Renderer {
     private val rotationMatrix2 = FloatArray(16)
 
     var frustumNearF: Float? = null
+
     var frustumFarF: Float? = null
 
     private var ratio: Float? = null
