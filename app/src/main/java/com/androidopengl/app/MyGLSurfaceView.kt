@@ -133,7 +133,7 @@ open class MyRenderer : GLSurfaceView.Renderer {
             )
         )
         context?.let {
-            mTriangle4 = TriangleOpenGLObject(context, ContextCompat.getColor(it, R.color.blue).colorToFloatArray(), floatArrayOf(
+            mTriangle4 = TriangleOpenGLObject(context, ContextCompat.getColor(it, R.color.teal_200).colorToFloatArray(), floatArrayOf(
                 0.5f, 0.5f, 0.0f,               // top
                 0.4f, 0.4f, 0.0f,               // bottom left
                 0.5f, 0.4f, 0.0f                // bottom right
@@ -199,6 +199,6 @@ open class MyRenderer : GLSurfaceView.Renderer {
         mTriangle2.draw()
         mTriangle.draw(scratch)
         mTriangle3.draw(scratch2)
-        mTriangle4?.draw(vPMatrix)
+        mTriangle4?.draw(scratch)
     }
 }
