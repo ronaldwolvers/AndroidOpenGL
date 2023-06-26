@@ -42,8 +42,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:maxLines="1"
-            android:minLines="1"
-            android:text="3.0" />
+            android:minLines="1" />
 
     </LinearLayout>
 
@@ -63,8 +62,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:maxLines="1"
-            android:minLines="1"
-            android:text="7.0" />
+            android:minLines="1" />
 
     </LinearLayout>
 

@@ -149,8 +149,18 @@ open class MyRenderer : GLSurfaceView.Renderer {
     private val rotationMatrix2 = FloatArray(16)
 
     var frustumNearF: Float? = null
+        set(value) {
+            logEvent("frustumNearF is being written to in MyRenderer.\n" +
+                    "frustumNearF: $value")
+            field = value
+        }
 
     var frustumFarF: Float? = null
+        set(value) {
+            logEvent("frustumFarF is being written to in MyRenderer.\n" +
+                    "frustumFarF: $value")
+            field = value
+        }
 
     private var ratio: Float? = null
 
@@ -180,8 +190,8 @@ open class MyRenderer : GLSurfaceView.Renderer {
                 ratio!!,
                 -1f,
                 1f,
-                frustumNearF ?: 3f,
-                frustumFarF ?: 7f
+                frustumNearF ?: DEFAULT_NEAR_F,
+                frustumFarF ?: DEFAULT_FAR_F
             )
         }
 
