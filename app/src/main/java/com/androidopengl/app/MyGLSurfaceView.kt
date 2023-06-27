@@ -112,6 +112,8 @@ open class MyRenderer : GLSurfaceView.Renderer {
     private lateinit var mTriangle: Triangle
     private lateinit var mTriangle2: Triangle
     private lateinit var mTriangle3: Triangle
+    //Triangles 5, 6 and 7 will replace the original triangles.
+    private var mTriangle5: TriangleOpenGLObject? = null
     private var mTriangle4: TriangleOpenGLObject? = null
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig) {
@@ -133,7 +135,12 @@ open class MyRenderer : GLSurfaceView.Renderer {
             )
         )
         context?.let {
-            mTriangle4 = TriangleOpenGLObject(context, ContextCompat.getColor(it, R.color.teal_200).colorToFloatArray(), floatArrayOf(
+            mTriangle5 = TriangleOpenGLObject(it, ContextCompat.getColor(it, R.color.purple_200).colorToFloatArray(), floatArrayOf(
+                0.0f, 0.62f, 0.0f,              // top
+                -0.5f, -0.31f, 0.0f,            // bottom left
+                0.5f, -0.31f, 0.0f               // bottom right
+            ))
+            mTriangle4 = TriangleOpenGLObject(it, ContextCompat.getColor(it, R.color.teal_200).colorToFloatArray(), floatArrayOf(
                 0.5f, 0.5f, 0.0f,               // top
                 0.4f, 0.4f, 0.0f,               // bottom left
                 0.5f, 0.4f, 0.0f                // bottom right
@@ -233,6 +240,7 @@ open class MyRenderer : GLSurfaceView.Renderer {
 //        mTriangle2.draw()
 //        mTriangle.draw(scratch)
 //        mTriangle3.draw(scratch2)
+        mTriangle5?.draw(vPMatrix)
         mTriangle4?.draw(vPMatrix)
     }
 }
