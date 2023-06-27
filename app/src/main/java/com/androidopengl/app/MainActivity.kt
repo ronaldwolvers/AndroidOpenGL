@@ -13,8 +13,9 @@ enum class RenderMode(val renderMode: Int) {
     RENDERMODE_CONTINUOUSLY(GLSurfaceView.RENDERMODE_CONTINUOUSLY)
 }
 
-val renderMode: RenderMode = RenderMode.RENDERMODE_WHEN_DIRTY
+val renderMode: RenderMode = RenderMode.RENDERMODE_CONTINUOUSLY
 
+const val DEFAULT_ANGLE_IN_DEGREES_F = 10F
 const val DEFAULT_NEAR_F = 3F
 const val DEFAULT_FAR_F = 7F
 

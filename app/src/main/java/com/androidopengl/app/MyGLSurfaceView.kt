@@ -101,7 +101,7 @@ class MyGLSurfaceView : GLSurfaceView {
 open class MyRenderer : GLSurfaceView.Renderer {
 
     @Volatile
-    var angle: Float = 0f
+    var angle: Float = DEFAULT_ANGLE_IN_DEGREES_F
         set(value) {
             logEvent("`angle` in MyRenderer is being set to: $value")
             field = value
@@ -114,6 +114,8 @@ open class MyRenderer : GLSurfaceView.Renderer {
     private lateinit var mTriangle3: Triangle
     //Triangles 5, 6 and 7 will replace the original triangles.
     private var mTriangle5: TriangleOpenGLObject? = null
+    private var mTriangle6: TriangleOpenGLObject?= null
+    private var mTriangle7: TriangleOpenGLObject? = null
     private var mTriangle4: TriangleOpenGLObject? = null
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig) {
@@ -138,8 +140,18 @@ open class MyRenderer : GLSurfaceView.Renderer {
             mTriangle5 = TriangleOpenGLObject(it, ContextCompat.getColor(it, R.color.purple_200).colorToFloatArray(), floatArrayOf(
                 0.0f, 0.62f, 0.0f,              // top
                 -0.5f, -0.31f, 0.0f,            // bottom left
-                0.5f, -0.31f, 0.0f               // bottom right
+                0.5f, -0.31f, 0.0f              // bottom right
             ))
+            mTriangle6 = TriangleOpenGLObject(it, ContextCompat.getColor(it, R.color.purple_500).colorToFloatArray(), floatArrayOf(
+                0.0f, 0.62f, 0.0f,              // top
+                -0.5f, -0.31f, 0.0f,            // bottom left
+                0.5f, -0.31f, 0.0f              // bottom right
+            ))
+            mTriangle7 = TriangleOpenGLObject(it, ContextCompat.getColor(it, R.color.teal_700).colorToFloatArray(), floatArrayOf(
+                0.0f, 0.3f, 0.0f,               // top
+                -0.3f, -0.11f, 0.0f,            // bottom left
+                0.3f, -0.11f, 0.0f              // bottom right
+                ))
             mTriangle4 = TriangleOpenGLObject(it, ContextCompat.getColor(it, R.color.teal_200).colorToFloatArray(), floatArrayOf(
                 0.5f, 0.5f, 0.0f,               // top
                 0.4f, 0.4f, 0.0f,               // bottom left
@@ -240,7 +252,9 @@ open class MyRenderer : GLSurfaceView.Renderer {
 //        mTriangle2.draw()
 //        mTriangle.draw(scratch)
 //        mTriangle3.draw(scratch2)
-        mTriangle5?.draw(vPMatrix)
+        mTriangle5?.draw()
+        mTriangle6?.draw(scratch)
+        mTriangle7?.draw(scratch2)
         mTriangle4?.draw(vPMatrix)
     }
 }
