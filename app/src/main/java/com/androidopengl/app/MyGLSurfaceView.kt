@@ -9,9 +9,16 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.core.content.ContextCompat
 import com.androidopengl.app.opengl.triangle.TriangleOpenGLObject
+import com.androidopengl.app.utils.a
+import com.androidopengl.app.utils.b
 import com.androidopengl.app.utils.colorToFloatArray
+import com.androidopengl.app.utils.g
+import com.androidopengl.app.utils.r
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
+
+//Use only values that fit inside an `int` as opposed to a `float` or the app will crash.
+const val DEFAULT_BACKGROUND_COLOR = 0xFFFFFFFF
 
 class MyGLSurfaceView : GLSurfaceView {
 
@@ -118,8 +125,9 @@ open class MyRenderer : GLSurfaceView.Renderer {
 
         logEvent("onSurfaceCreated() is being called...")
 
-        // Set the background frame color
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
+        // Set the background frame color.
+        val backGroundColor = DEFAULT_BACKGROUND_COLOR.toInt().colorToFloatArray()
+        GLES20.glClearColor(backGroundColor.r, backGroundColor.g, backGroundColor.b, backGroundColor.a)
 
         context?.let {
             mTriangle = TriangleOpenGLObject(it, ContextCompat.getColor(it, R.color.purple_200).colorToFloatArray(), floatArrayOf(
