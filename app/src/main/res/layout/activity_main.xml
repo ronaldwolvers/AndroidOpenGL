@@ -34,7 +34,7 @@
             android:id="@+id/edit_text_frustum_near_f"
             android:layout_width="@dimen/edit_text_width"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
+            android:inputType="numberDecimal|numberSigned"
             android:maxLines="1"
             android:minLines="1" />
 
@@ -54,7 +54,7 @@
             android:id="@+id/edit_text_frustum_far_f"
             android:layout_width="@dimen/edit_text_width"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
+            android:inputType="numberDecimal|numberSigned"
             android:maxLines="1"
             android:minLines="1" />
 
@@ -74,7 +74,7 @@
             android:id="@+id/edit_text_eye_z_f"
             android:layout_width="@dimen/edit_text_width"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
+            android:inputType="numberDecimal|numberSigned"
             android:maxLines="1"
             android:minLines="1" />
 
@@ -94,7 +94,7 @@
             android:id="@+id/edit_text_up_y_f"
             android:layout_width="@dimen/edit_text_width"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
+            android:inputType="numberDecimal|numberSigned"
             android:maxLines="1"
             android:minLines="1" />
 
