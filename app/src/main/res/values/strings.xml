@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">AndroidOpenGL</string>
     <string name="move_your_position_over_the_surface_to_move_one_of_the_triangles">Move your finger over the surface to move one of the triangles</string>
+    <string name="far">Far:</string>
+    <string name="near">Near:</string>
 </resources>

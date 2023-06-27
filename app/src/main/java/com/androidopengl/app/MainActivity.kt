@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        farF = findViewById(R.id.edit_text_frustum_fram_f)
+        farF = findViewById(R.id.edit_text_frustum_far_f)
         farF.setText(DEFAULT_FAR_F.toString())
         farF.addTextChangedListener(object: TextWatcher {
 
@@ -87,5 +87,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+
     }
 }

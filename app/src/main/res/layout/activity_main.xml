@@ -34,7 +34,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Near: " />
+            android:text="@string/near" />
 
         <EditText
             android:id="@+id/edit_text_frustum_near_f"
@@ -54,10 +54,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Far: " />
+            android:text="@string/far" />
 
         <EditText
-            android:id="@+id/edit_text_frustum_fram_f"
+            android:id="@+id/edit_text_frustum_far_f"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
