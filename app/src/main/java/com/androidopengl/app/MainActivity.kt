@@ -51,12 +51,15 @@ class MainActivity : AppCompatActivity() {
                 val changedString = s.toString()
                 try {
                     myRenderer.frustumNearF = changedString.toFloat()
-                    logEvent("Requesting render...")
-                    glSurfaceView.requestRender()
+
                 } catch (exception: Exception) {
                     logError("Something went wrong: ${exception.message}")
                     exception.printStackTrace()
                 }
+
+                logEvent("Requesting render...")
+                glSurfaceView.requestRender()
+
             }
         })
 
@@ -72,12 +75,14 @@ class MainActivity : AppCompatActivity() {
                 val changedString = s.toString()
                 try {
                     myRenderer.frustumFarF = changedString.toFloat()
-                    logEvent("Requesting render...")
-                    glSurfaceView.requestRender()
+
                 } catch (exception: Exception) {
                     logError("Something went wrong: ${exception.message}")
                     exception.printStackTrace()
                 }
+
+                logEvent("Requesting render...")
+                glSurfaceView.requestRender()
             }
 
         })

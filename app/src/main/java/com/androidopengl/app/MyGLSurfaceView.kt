@@ -183,16 +183,21 @@ open class MyRenderer : GLSurfaceView.Renderer {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)
 
         if (ratio != null) {
-            Matrix.frustumM(
-                projectionMatrix,
-                0,
-                -ratio!!,
-                ratio!!,
-                -1f,
-                1f,
-                frustumNearF ?: DEFAULT_NEAR_F,
-                frustumFarF ?: DEFAULT_FAR_F
-            )
+            try {
+                Matrix.frustumM(
+                    projectionMatrix,
+                    0,
+                    -ratio!!,
+                    ratio!!,
+                    -1f,
+                    1f,
+                    frustumNearF ?: DEFAULT_NEAR_F,
+                    frustumFarF ?: DEFAULT_FAR_F
+                )
+            } catch (e: Exception) {
+                logError("Something went wrong while calling Matrix.frustumM(): ${e.message}")
+                e.printStackTrace()
+            }
         }
 
         // Set the camera position (View matrix)
