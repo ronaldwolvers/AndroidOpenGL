@@ -109,13 +109,9 @@ open class MyRenderer : GLSurfaceView.Renderer {
 
     var context: Context? = null
 
-    private lateinit var mTriangle: Triangle
-    private lateinit var mTriangle2: Triangle
-    private lateinit var mTriangle3: Triangle
-    //Triangles 5, 6 and 7 will replace the original triangles.
-    private var mTriangle5: TriangleOpenGLObject? = null
-    private var mTriangle6: TriangleOpenGLObject?= null
-    private var mTriangle7: TriangleOpenGLObject? = null
+    private var mTriangle: TriangleOpenGLObject? = null
+    private var mTriangle2: TriangleOpenGLObject?= null
+    private var mTriangle3: TriangleOpenGLObject? = null
     private var mTriangle4: TriangleOpenGLObject? = null
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig) {
@@ -125,29 +121,18 @@ open class MyRenderer : GLSurfaceView.Renderer {
         // Set the background frame color
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
 
-        mTriangle = Triangle(useMvpMatrix = true, color = floatArrayOf(0.1F, 0.2f, 0.23f, 0.5f))
-        mTriangle2 = Triangle(useMvpMatrix = false)
-        mTriangle3 = Triangle(
-            useMvpMatrix = true, color = floatArrayOf(1.0F, 0.0F, 0.0F, 0.5F),
-            coords =
-            floatArrayOf(
-                0.0f, 0.3008459f, 0.0f,         // top
-                -0.3f, -0.111004243f, 0.0f,     // bottom left
-                0.3f, -0.111004243f, 0.0f       // bottom right
-            )
-        )
         context?.let {
-            mTriangle5 = TriangleOpenGLObject(it, ContextCompat.getColor(it, R.color.purple_200).colorToFloatArray(), floatArrayOf(
+            mTriangle = TriangleOpenGLObject(it, ContextCompat.getColor(it, R.color.purple_200).colorToFloatArray(), floatArrayOf(
                 0.0f, 0.62f, 0.0f,              // top
                 -0.5f, -0.31f, 0.0f,            // bottom left
                 0.5f, -0.31f, 0.0f              // bottom right
             ))
-            mTriangle6 = TriangleOpenGLObject(it, ContextCompat.getColor(it, R.color.purple_500).colorToFloatArray(), floatArrayOf(
+            mTriangle2 = TriangleOpenGLObject(it, ContextCompat.getColor(it, R.color.purple_500).colorToFloatArray(), floatArrayOf(
                 0.0f, 0.62f, 0.0f,              // top
                 -0.5f, -0.31f, 0.0f,            // bottom left
                 0.5f, -0.31f, 0.0f              // bottom right
             ))
-            mTriangle7 = TriangleOpenGLObject(it, ContextCompat.getColor(it, R.color.teal_700).colorToFloatArray(), floatArrayOf(
+            mTriangle3 = TriangleOpenGLObject(it, ContextCompat.getColor(it, R.color.teal_700).colorToFloatArray(), floatArrayOf(
                 0.0f, 0.3f, 0.0f,               // top
                 -0.3f, -0.11f, 0.0f,            // bottom left
                 0.3f, -0.11f, 0.0f              // bottom right
@@ -249,12 +234,10 @@ open class MyRenderer : GLSurfaceView.Renderer {
         val scratch2 = FloatArray(16)
         Matrix.multiplyMM(scratch2, 0, vPMatrix, 0, rotationMatrix2, 0)
 
-//        mTriangle2.draw()
-//        mTriangle.draw(scratch)
-//        mTriangle3.draw(scratch2)
-        mTriangle5?.draw()
-        mTriangle6?.draw(scratch)
-        mTriangle7?.draw(scratch2)
+        //Draw the triangles.
+        mTriangle?.draw()
+        mTriangle2?.draw(scratch)
+        mTriangle3?.draw(scratch2)
         mTriangle4?.draw(vPMatrix)
     }
 }
