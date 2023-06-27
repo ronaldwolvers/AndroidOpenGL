@@ -61,21 +61,25 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        fun EditText.addAndroidOpenGLTextChanged(operation: (CharSequence?) -> Unit) {
+            this.addTextChangedListener(object: AndroidOpenGLTextChanged(operation){})
+        }
+
         nearF = findViewById(R.id.edit_text_frustum_near_f)
         nearF.setText(DEFAULT_NEAR_F.toString())
-        nearF.addTextChangedListener(object: AndroidOpenGLTextChanged( {
-                logEvent("onTextChanged() is being called on `nearF`...")
-                val changedString = it.toString()
-                myRenderer.frustumNearF = changedString.toFloat()
-        }){})
+        nearF.addAndroidOpenGLTextChanged {
+            logEvent("onTextChanged() is being called on `nearF`...")
+            val changedString = it.toString()
+            myRenderer.frustumNearF = changedString.toFloat()
+        }
 
         farF = findViewById(R.id.edit_text_frustum_far_f)
         farF.setText(DEFAULT_FAR_F.toString())
-        farF.addTextChangedListener(object: AndroidOpenGLTextChanged( {
+        farF.addAndroidOpenGLTextChanged {
             logEvent("onTextChanged() is being called on `farF`...")
             val changedString = it.toString()
             myRenderer.frustumFarF = changedString.toFloat()
-        }){})
+        }
 
         eyeZF = findViewById(R.id.edit_text_eye_z_f)
         eyeZF.setText(DEFAULT_EYE_Z_F.toString())
