@@ -18,7 +18,9 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 //Use only values that fit inside an `int` as opposed to a `float` or the app will crash.
-const val DEFAULT_BACKGROUND_COLOR = 0xFFFFFFFF
+private const val DEFAULT_BACKGROUND_COLOR = 0xFFFFFFFF
+
+private const val TOUCH_SCALE_FACTOR: Float = 180.0f / 320.0f
 
 class MyGLSurfaceView : GLSurfaceView {
 
@@ -56,11 +58,9 @@ class MyGLSurfaceView : GLSurfaceView {
 
         logEvent("MyGLSurfaceView.init is being called...")
 
-        // Create an OpenGL ES 2.0 context
+        // Create an OpenGL ES 2.0 context.
         setEGLContextClientVersion(2)
     }
-
-    private val TOUCH_SCALE_FACTOR: Float = 180.0f / 320.0f
 
     private var previousX: Float = 0f
     private var previousY: Float = 0f
@@ -184,6 +184,8 @@ open class MyRenderer : GLSurfaceView.Renderer {
 
         if (height != 0) {
             ratio = width.toFloat() / height.toFloat()
+        } else {
+            logError("Attempted to calculate `ratio`, but the specified height was 0.0F...")
         }
     }
 
@@ -191,7 +193,7 @@ open class MyRenderer : GLSurfaceView.Renderer {
 
         logEvent( "onDrawFrame() is being called...")
 
-        // Redraw background color
+        // Redraw background color.
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT)
 
         if (ratio != null) {
