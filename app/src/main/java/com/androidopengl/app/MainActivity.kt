@@ -44,13 +44,13 @@ class MainActivity : AppCompatActivity() {
 
         glSurfaceView.renderMode = renderMode.renderMode
 
-        class AndroidOpenGLTextChanged(val operation: (()-> Unit)): TextWatcher {
+        open class AndroidOpenGLTextChanged(val operation: ((CharSequence?)-> Unit)): TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun afterTextChanged(s: Editable?) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 try {
-                    operation.invoke()
+                    operation.invoke(s)
                 } catch (e: Exception) {
                     logError("Something went wrong: ${e.message}")
                     e.printStackTrace()
@@ -59,56 +59,23 @@ class MainActivity : AppCompatActivity() {
                 logEvent("Requesting render...")
                 glSurfaceView.requestRender()
             }
-
         }
 
         nearF = findViewById(R.id.edit_text_frustum_near_f)
         nearF.setText(DEFAULT_NEAR_F.toString())
-        nearF.addTextChangedListener(object: TextWatcher {
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun afterTextChanged(s: Editable?) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        nearF.addTextChangedListener(object: AndroidOpenGLTextChanged( {
                 logEvent("onTextChanged() is being called on `nearF`...")
-                val changedString = s.toString()
-                try {
-                    myRenderer.frustumNearF = changedString.toFloat()
-
-                } catch (exception: Exception) {
-                    logError("Something went wrong: ${exception.message}")
-                    exception.printStackTrace()
-                }
-
-                logEvent("Requesting render...")
-                glSurfaceView.requestRender()
-
-            }
-        })
+                val changedString = it.toString()
+                myRenderer.frustumNearF = changedString.toFloat()
+        }){})
 
         farF = findViewById(R.id.edit_text_frustum_far_f)
         farF.setText(DEFAULT_FAR_F.toString())
-        farF.addTextChangedListener(object: TextWatcher {
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun afterTextChanged(s: Editable?) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                logEvent("onTextChanged() is being called on `farF`...")
-                val changedString = s.toString()
-                try {
-                    myRenderer.frustumFarF = changedString.toFloat()
-
-                } catch (exception: Exception) {
-                    logError("Something went wrong: ${exception.message}")
-                    exception.printStackTrace()
-                }
-
-                logEvent("Requesting render...")
-                glSurfaceView.requestRender()
-            }
-
-        })
+        farF.addTextChangedListener(object: AndroidOpenGLTextChanged( {
+            logEvent("onTextChanged() is being called on `farF`...")
+            val changedString = it.toString()
+            myRenderer.frustumFarF = changedString.toFloat()
+        }){})
 
         eyeZF = findViewById(R.id.edit_text_eye_z_f)
         eyeZF.setText(DEFAULT_EYE_Z_F.toString())
