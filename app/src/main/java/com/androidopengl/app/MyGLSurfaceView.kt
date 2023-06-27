@@ -22,6 +22,10 @@ private const val DEFAULT_BACKGROUND_COLOR = 0xFFFFFFFF
 
 private const val TOUCH_SCALE_FACTOR: Float = 180.0f / 320.0f
 
+private const val TIME_FACTOR: Long = 4000L
+
+private const val ANGLE_FACTOR: Float = 0.09F
+
 class MyGLSurfaceView : GLSurfaceView {
 
     private var context: Context? = null
@@ -254,8 +258,8 @@ open class MyRenderer : GLSurfaceView.Renderer {
         Matrix.multiplyMM(vPMatrix, 0, projectionMatrix, 0, viewMatrix, 0)
 
         // Create a rotation transformation for the triangle
-        val time = SystemClock.uptimeMillis() % 4000L
-        val angleInTime = 0.090f * time.toInt()
+        val time = SystemClock.uptimeMillis() % TIME_FACTOR
+        val angleInTime = ANGLE_FACTOR * time.toInt()
 
         logEvent("Creating a rotation matrix...\n" +
                     "time: $time\n" +
