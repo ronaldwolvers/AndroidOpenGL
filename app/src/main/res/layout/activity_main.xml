@@ -1,27 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_normal"
     tools:context=".MainActivity">
+
+    <com.androidopengl.app.MyGLSurfaceView
+        android:id="@+id/gl_surface_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/gl_surface_view_height"
+        android:background="@android:color/transparent" />
 
     <TextView
         android:id="@+id/hello_world_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/move_your_position_over_the_surface_below_to_move_one_of_the_triangles"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="@dimen/margin_normal"
+        android:text="@string/move_your_position_over_the_surface_to_move_one_of_the_triangles" />
 
-    <com.androidopengl.app.MyGLSurfaceView
-        android:id="@+id/gl_surface_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintTop_toBottomOf="@id/hello_world_tv" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/near" />
+
+        <EditText
+            android:id="@+id/edit_text_frustum_near_f"
+            android:layout_width="@dimen/edit_text_width"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal|numberSigned"
+            android:maxLines="1"
+            android:minLines="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/far" />
+
+        <EditText
+            android:id="@+id/edit_text_frustum_far_f"
+            android:layout_width="@dimen/edit_text_width"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal|numberSigned"
+            android:maxLines="1"
+            android:minLines="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/eye_z" />
+
+        <EditText
+            android:id="@+id/edit_text_eye_z_f"
+            android:layout_width="@dimen/edit_text_width"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal|numberSigned"
+            android:maxLines="1"
+            android:minLines="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/up_y" />
+
+        <EditText
+            android:id="@+id/edit_text_up_y_f"
+            android:layout_width="@dimen/edit_text_width"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal|numberSigned"
+            android:maxLines="1"
+            android:minLines="1" />
+
+    </LinearLayout>
+
+</LinearLayout>
