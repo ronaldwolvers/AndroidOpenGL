@@ -18,6 +18,8 @@ val renderMode: RenderMode = RenderMode.RENDERMODE_CONTINUOUSLY
 const val DEFAULT_ANGLE_IN_DEGREES_F = 10F
 const val DEFAULT_NEAR_F = 3F
 const val DEFAULT_FAR_F = 7F
+const val DEFAULT_EYE_Z_F = 3F
+const val DEFAULT_UP_Y_F = 1F
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,8 +28,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var nearF: EditText
     private lateinit var farF: EditText
-    private lateinit var eyeZ: EditText
-    private lateinit var upY: EditText
+    private lateinit var eyeZF: EditText
+    private lateinit var upYF: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,6 +92,10 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+        eyeZF = findViewById(R.id.edit_text_eye_z_f)
+        eyeZF.setText(DEFAULT_EYE_Z_F.toString())
 
+        upYF = findViewById(R.id.edit_text_up_y_f)
+        upYF.setText(DEFAULT_UP_Y_F.toString())
     }
 }

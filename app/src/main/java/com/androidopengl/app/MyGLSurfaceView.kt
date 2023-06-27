@@ -174,6 +174,20 @@ open class MyRenderer : GLSurfaceView.Renderer {
             field = value
         }
 
+    var eyeZF: Float? = null
+        set(value) {
+            logEvent("eyeZF is being written to in MyRenderer.\n" +
+                    "eyeZF: $value")
+            field = value
+        }
+
+    var upYF: Float? = null
+        set(value) {
+            logEvent("upYF is being written to in MyRenderer.\n" +
+                    "upZF: $value")
+            field = value
+        }
+
     private var ratio: Float? = null
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -217,7 +231,7 @@ open class MyRenderer : GLSurfaceView.Renderer {
         }
 
         // Set the camera position (View matrix)
-        Matrix.setLookAtM(viewMatrix, 0, 0f, 0f, 3f, 0f, 0f, 0f, 0f, 1.0f, 0.0f)
+        Matrix.setLookAtM(viewMatrix, 0, 0f, 0f, eyeZF ?: DEFAULT_EYE_Z_F, 0f, 0f, 0f, 0f, upYF ?: DEFAULT_UP_Y_F, 0.0f)
 
         // Calculate the projection and view transformation
         Matrix.multiplyMM(vPMatrix, 0, projectionMatrix, 0, viewMatrix, 0)
