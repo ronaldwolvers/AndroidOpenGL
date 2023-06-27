@@ -198,6 +198,8 @@ open class MyRenderer : GLSurfaceView.Renderer {
                 logError("Something went wrong while calling Matrix.frustumM(): ${e.message}")
                 e.printStackTrace()
             }
+        } else {
+            logError("Calculated `ratio` is null...")
         }
 
         // Set the camera position (View matrix)
