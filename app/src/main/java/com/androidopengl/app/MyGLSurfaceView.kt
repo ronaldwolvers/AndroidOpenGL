@@ -231,7 +231,24 @@ open class MyRenderer : GLSurfaceView.Renderer {
         }
 
         // Set the camera position (View matrix)
-        Matrix.setLookAtM(viewMatrix, 0, 0f, 0f, eyeZF ?: DEFAULT_EYE_Z_F, 0f, 0f, 0f, 0f, upYF ?: DEFAULT_UP_Y_F, 0.0f)
+        try {
+            Matrix.setLookAtM(
+                viewMatrix,
+                0,
+                0f,
+                0f,
+                eyeZF ?: DEFAULT_EYE_Z_F,
+                0f,
+                0f,
+                0f,
+                0f,
+                upYF ?: DEFAULT_UP_Y_F,
+                0.0f
+            )
+        } catch (e: Exception) {
+            logError("Something went wrong while calling Matrix.setLookAtM(): ${e.message}")
+            e.printStackTrace()
+        }
 
         // Calculate the projection and view transformation
         Matrix.multiplyMM(vPMatrix, 0, projectionMatrix, 0, viewMatrix, 0)

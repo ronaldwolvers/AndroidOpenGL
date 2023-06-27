@@ -83,8 +83,18 @@ class MainActivity : AppCompatActivity() {
 
         eyeZF = findViewById(R.id.edit_text_eye_z_f)
         eyeZF.setText(DEFAULT_EYE_Z_F.toString())
+        eyeZF.addAndroidOpenGLTextChanged {
+            logEvent("onTextChanged() is being called on `eyeZF`...")
+            val changedString = it.toString()
+            myRenderer.eyeZF = changedString.toFloat()
+        }
 
         upYF = findViewById(R.id.edit_text_up_y_f)
         upYF.setText(DEFAULT_UP_Y_F.toString())
+        upYF.addAndroidOpenGLTextChanged {
+            logEvent("onTextChanged() is being called on `upYF`...")
+            val changedString = it.toString()
+            myRenderer.upYF = changedString.toFloat()
+        }
     }
 }
