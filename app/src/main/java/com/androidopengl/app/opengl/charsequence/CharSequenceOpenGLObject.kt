@@ -5,7 +5,7 @@ import android.opengl.GLES20
 import android.opengl.GLES20.glVertexAttribPointer
 import androidx.core.content.ContextCompat
 import com.androidopengl.app.R
-import com.androidopengl.app.loadShaderFromFile
+import com.androidopengl.app.opengl.loadShaderFromFile
 import com.androidopengl.app.logError
 import com.androidopengl.app.logEvent
 import com.androidopengl.app.opengl.COORDINATES_PER_VERTEX

@@ -3,7 +3,7 @@ package com.androidopengl.app.opengl.triangle
 import android.content.Context
 import android.opengl.GLES20
 import android.opengl.GLES20.glVertexAttribPointer
-import com.androidopengl.app.loadShaderFromFile
+import com.androidopengl.app.opengl.loadShaderFromFile
 import com.androidopengl.app.logError
 import com.androidopengl.app.logEvent
 import com.androidopengl.app.opengl.COORDINATES_PER_VERTEX

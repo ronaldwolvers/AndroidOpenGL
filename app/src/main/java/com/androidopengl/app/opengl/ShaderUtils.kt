@@ -1,7 +1,10 @@
-package com.androidopengl.app
+package com.androidopengl.app.opengl
 
 import android.content.Context
 import android.opengl.GLES20
+import com.androidopengl.app.logError
+import com.androidopengl.app.logEvent
+import com.androidopengl.app.logWarning
 import com.androidopengl.app.utils.convertInputStreamToString
 import java.io.IOException
 import java.io.InputStream
