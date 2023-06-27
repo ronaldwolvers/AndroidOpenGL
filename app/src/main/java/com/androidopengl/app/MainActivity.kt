@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var nearF: EditText
     private lateinit var farF: EditText
+    private lateinit var eyeZ: EditText
+    private lateinit var upY: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
