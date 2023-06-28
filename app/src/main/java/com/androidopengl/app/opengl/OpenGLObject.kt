@@ -18,16 +18,27 @@ abstract class OpenGLObject(
     private val context: Context? = null
 ) {
 
-    val vertexStride: Int = COORDINATES_PER_VERTEX * 4
-    var vertexBuffer: FloatBuffer =
+    fun reinitializeVertexBuffer() {
+        vertexBuffer = initializeVertexBuffer()
+    }
+
+    private fun initializeVertexBuffer(): FloatBuffer {
+
+        logEvent("initializeVertexBuffer() is being called...")
+
         //4 bytes per float.
-        ByteBuffer.allocateDirect(coordinates.size * 4).run {
+        return ByteBuffer.allocateDirect(coordinates.size * 4).run {
             order(ByteOrder.nativeOrder())
             asFloatBuffer().apply {
                 put(coordinates)
                 position(0)
             }
         }
+    }
+
+    val vertexStride: Int = COORDINATES_PER_VERTEX * 4
+    var vertexBuffer: FloatBuffer = initializeVertexBuffer()
+
     val vertexCount: Int = this.coordinates.size / COORDINATES_PER_VERTEX
 
     abstract fun createProgram()

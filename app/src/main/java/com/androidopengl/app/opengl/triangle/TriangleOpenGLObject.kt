@@ -12,7 +12,7 @@ import com.androidopengl.app.opengl.OpenGLObject
 class TriangleOpenGLObject(
     private val context: Context? = null,
     private val color: FloatArray,
-    coordinates: FloatArray
+    val coordinates: FloatArray
 ) : OpenGLObject(coordinates, context) {
 
     private var programHandle: Int = -1

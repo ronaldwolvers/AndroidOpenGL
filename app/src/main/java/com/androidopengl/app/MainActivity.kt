@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
+import com.google.android.material.slider.Slider
 
 @Suppress("unused")
 enum class RenderMode(val renderMode: Int) {
@@ -20,6 +21,7 @@ const val DEFAULT_NEAR_F = 3F
 const val DEFAULT_FAR_F = 7F
 const val DEFAULT_EYE_Z_F = 3F
 const val DEFAULT_UP_Y_F = 1F
+const val DEFAULT_TOP_Z = 0.0F
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,6 +32,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var farF: EditText
     private lateinit var eyeZF: EditText
     private lateinit var upYF: EditText
+    private lateinit var topZF: EditText
+    private lateinit var topZFSlider: Slider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,5 +100,19 @@ class MainActivity : AppCompatActivity() {
             val changedString = it.toString()
             myRenderer.upYF = changedString.toFloat()
         }
+
+        topZF = findViewById(R.id.edit_text_top_z_f)
+        topZF.setText(DEFAULT_TOP_Z.toString())
+        topZF.addAndroidOpenGLTextChanged {
+            logEvent("onTextChanged() is being called on `topZF`...")
+            val changedString = it.toString()
+            myRenderer.topZF = changedString.toFloat()
+        }
+
+        topZFSlider = findViewById(R.id.slider_top_z_f)
+        topZFSlider.value = DEFAULT_TOP_Z
+        topZFSlider.addOnChangeListener(Slider.OnChangeListener { _, value, _ ->
+            topZF.setText(String.format("%.2f", value))
+        })
     }
 }
