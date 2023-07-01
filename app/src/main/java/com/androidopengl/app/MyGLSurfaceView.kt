@@ -191,6 +191,13 @@ open class MyRenderer : GLSurfaceView.Renderer {
             field = value
         }
 
+    var eyeYF: Float? = null
+        set(value) {
+            logEvent("`eyeYF` is being written to in MyRenderer.\n" +
+                    "eyeYF: $value")
+            field = value
+        }
+
     var eyeZF: Float? = null
         set(value) {
             logEvent("`eyeZF` is being written to in MyRenderer.\n" +
@@ -261,7 +268,7 @@ open class MyRenderer : GLSurfaceView.Renderer {
                 viewMatrix,
                 0,
                 0f,
-                0f,
+                eyeYF ?: DEFAULT_EYE_Y_F,
                 eyeZF ?: DEFAULT_EYE_Z_F,
                 0f,
                 0f,

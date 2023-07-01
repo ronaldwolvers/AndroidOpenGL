@@ -19,6 +19,7 @@ val renderMode: RenderMode = RenderMode.RENDERMODE_CONTINUOUSLY
 const val DEFAULT_ANGLE_IN_DEGREES_F = 10F
 const val DEFAULT_NEAR_F = 3F
 const val DEFAULT_FAR_F = 7F
+const val DEFAULT_EYE_Y_F = 0F
 const val DEFAULT_EYE_Z_F = 3F
 const val DEFAULT_UP_Y_F = 1F
 const val DEFAULT_TOP_Z = 0.0F
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var nearF: EditText
     private lateinit var farF: EditText
+    private lateinit var eyeYF: EditText
     private lateinit var eyeZF: EditText
     private lateinit var upYF: EditText
     private lateinit var topZF: EditText
@@ -84,6 +86,20 @@ class MainActivity : AppCompatActivity() {
             val changedString = it.toString()
             myRenderer.frustumFarF = changedString.toFloat()
         }
+
+        eyeYF = findViewById(R.id.edit_text_eye_y_f)
+        eyeYF.setText(DEFAULT_EYE_Y_F.toString())
+        eyeYF.addAndroidOpenGLTextChanged {
+            logEvent("onTextChanged() is being called on `eyeYF`...")
+            val changedString = it.toString()
+            myRenderer.eyeYF = changedString.toFloat()
+        }
+
+        topZFSlider = findViewById(R.id.slider_eye_z_f)
+        topZFSlider.value = DEFAULT_EYE_Y_F
+        topZFSlider.addOnChangeListener(Slider.OnChangeListener { _, value, _ ->
+            eyeYF.setText(String.format("%.2f", value))
+        })
 
         eyeZF = findViewById(R.id.edit_text_eye_z_f)
         eyeZF.setText(DEFAULT_EYE_Z_F.toString())

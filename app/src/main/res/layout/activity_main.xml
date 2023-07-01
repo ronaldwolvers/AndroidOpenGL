@@ -72,6 +72,26 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/eye_y" />
+
+            <EditText
+                android:id="@+id/edit_text_eye_y_f"
+                android:layout_width="@dimen/edit_text_width"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal|numberSigned"
+                android:maxLines="1"
+                android:minLines="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/eye_z" />
 
             <EditText
@@ -101,6 +121,14 @@
                 android:inputType="numberDecimal|numberSigned"
                 android:maxLines="1"
                 android:minLines="1" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/slider_eye_z_f"
+                android:layout_width="0dp"
+                android:valueFrom="-2.0f"
+                android:valueTo="2.0f"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
