@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Button
 import android.widget.EditText
 import com.google.android.material.slider.Slider
 
@@ -32,10 +33,21 @@ class MainActivity : AppCompatActivity() {
     private lateinit var nearF: EditText
     private lateinit var farF: EditText
     private lateinit var eyeYF: EditText
+    private lateinit var eyeYFSlider: Slider
     private lateinit var eyeZF: EditText
     private lateinit var upYF: EditText
     private lateinit var topZF: EditText
     private lateinit var topZFSlider: Slider
+    private lateinit var resetParametersButton: Button
+
+    private fun resetParameters() {
+        nearF.setText(DEFAULT_NEAR_F.toString())
+        farF.setText(DEFAULT_FAR_F.toString())
+        eyeYFSlider.value = DEFAULT_EYE_Y_F
+        eyeZF.setText(DEFAULT_EYE_Z_F.toString())
+        upYF.setText(DEFAULT_UP_Y_F.toString())
+        topZFSlider.value = DEFAULT_TOP_Z
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,10 +107,10 @@ class MainActivity : AppCompatActivity() {
             myRenderer.eyeYF = changedString.toFloat()
         }
 
-        topZFSlider = findViewById(R.id.slider_eye_z_f)
-        topZFSlider.value = DEFAULT_EYE_Y_F
-        topZFSlider.addOnChangeListener(Slider.OnChangeListener { _, value, _ ->
-            eyeYF.setText(String.format("%.2f", value))
+        eyeYFSlider = findViewById(R.id.slider_eye_z_f)
+        eyeYFSlider.value = DEFAULT_EYE_Y_F
+        eyeYFSlider.addOnChangeListener(Slider.OnChangeListener { _, value, _ ->
+            eyeYF.setText(String.format("%.1f", value))
         })
 
         eyeZF = findViewById(R.id.edit_text_eye_z_f)
@@ -128,7 +140,12 @@ class MainActivity : AppCompatActivity() {
         topZFSlider = findViewById(R.id.slider_top_z_f)
         topZFSlider.value = DEFAULT_TOP_Z
         topZFSlider.addOnChangeListener(Slider.OnChangeListener { _, value, _ ->
-            topZF.setText(String.format("%.2f", value))
+            topZF.setText(String.format("%.1f", value))
         })
+
+        resetParametersButton = findViewById(R.id.button_reset_parameters)
+        resetParametersButton.setOnClickListener {
+            resetParameters()
+        }
     }
 }
