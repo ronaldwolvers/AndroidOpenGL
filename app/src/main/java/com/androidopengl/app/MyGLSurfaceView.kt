@@ -8,6 +8,7 @@ import android.os.SystemClock
 import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.core.content.ContextCompat
+import com.androidopengl.app.opengl.square.SquareOpenGLObject
 import com.androidopengl.app.opengl.triangle.TriangleOpenGLObject
 import com.androidopengl.app.utils.a
 import com.androidopengl.app.utils.b
@@ -124,6 +125,7 @@ open class MyRenderer : GLSurfaceView.Renderer {
     private var mTriangle2: TriangleOpenGLObject?= null
     private var mTriangle3: TriangleOpenGLObject? = null
     private var mTriangle4: TriangleOpenGLObject? = null
+    private var mSquare: SquareOpenGLObject? = null
 
     private fun updateDrawnObjectCoordinates() {
         topZF?.let {
@@ -166,6 +168,13 @@ open class MyRenderer : GLSurfaceView.Renderer {
                 0.5f, 0.5f, topZF ?: DEFAULT_TOP_Z,               // top
                 0.4f, 0.4f, 0.0f,                                 // bottom left
                 0.5f, 0.4f, 0.0f                                  // bottom right
+            ))
+            mSquare = SquareOpenGLObject(it, ContextCompat.getColor(it, R.color.blue).colorToFloatArray(), floatArrayOf(
+                0.4f, 0.5f, 0.0f,
+                0.5f, 0.5f, 0.0f,
+                0.4f, 0.4f, 0.0f,
+                0.5f, 0.4f, 0.0f,
+
             ))
         }
     }
