@@ -24,6 +24,7 @@ const val DEFAULT_EYE_Y_F = 0F
 const val DEFAULT_EYE_Z_F = 3F
 const val DEFAULT_UP_Y_F = 1F
 const val DEFAULT_TOP_Z = 0.0F
+const val DEFAULT_SQUARES_Z = 0.0F
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,6 +39,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var upYF: EditText
     private lateinit var topZF: EditText
     private lateinit var topZFSlider: Slider
+    private lateinit var squaresZF: EditText
+    private lateinit var squaresZFSlider: Slider
     private lateinit var resetParametersButton: Button
 
     private fun resetParameters() {
@@ -47,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         eyeZF.setText(DEFAULT_EYE_Z_F.toString())
         upYF.setText(DEFAULT_UP_Y_F.toString())
         topZFSlider.value = DEFAULT_TOP_Z
+        squaresZFSlider.value = DEFAULT_SQUARES_Z
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -141,6 +145,20 @@ class MainActivity : AppCompatActivity() {
         topZFSlider.value = DEFAULT_TOP_Z
         topZFSlider.addOnChangeListener(Slider.OnChangeListener { _, value, _ ->
             topZF.setText(String.format("%.1f", value))
+        })
+
+        squaresZF = findViewById(R.id.edit_text_squares_z_f)
+        squaresZF.setText(DEFAULT_SQUARES_Z.toString())
+        squaresZF.addAndroidOpenGLTextChanged {
+            logEvent("onTextChanged() is being called on `squaresZF`...")
+            val changedString = it.toString()
+            myRenderer.squaresZF = changedString.toFloat()
+        }
+
+        squaresZFSlider = findViewById(R.id.slider_squares_z_f)
+        squaresZFSlider.value = DEFAULT_SQUARES_Z
+        squaresZFSlider.addOnChangeListener(Slider.OnChangeListener { _, value, _ ->
+            squaresZF.setText(String.format("%.1f", value))
         })
 
         resetParametersButton = findViewById(R.id.button_reset_parameters)

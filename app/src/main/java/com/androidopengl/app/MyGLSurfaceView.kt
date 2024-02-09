@@ -126,6 +126,7 @@ open class MyRenderer : GLSurfaceView.Renderer {
     private var mTriangle3: TriangleOpenGLObject? = null
     private var mTriangle4: TriangleOpenGLObject? = null
     private var mSquare: SquareOpenGLObject? = null
+    private var mSquare2: SquareOpenGLObject? = null
 
     private fun updateDrawnObjectCoordinates() {
         topZF?.let {
@@ -137,6 +138,20 @@ open class MyRenderer : GLSurfaceView.Renderer {
             mTriangle3?.reinitializeVertexBuffer()
             mTriangle4?.coordinates?.set(2, it)
             mTriangle4?.reinitializeVertexBuffer()
+            mSquare?.coordinates = floatArrayOf(
+                0.4f, 0.5f, squaresZF ?: DEFAULT_SQUARES_Z,                                 // top left
+                0.5f, 0.5f, squaresZF ?: DEFAULT_SQUARES_Z,                                 // top right
+                0.4f, 0.4f, squaresZF ?: DEFAULT_SQUARES_Z,                                 // bottom left
+                0.5f, 0.4f, squaresZF ?: DEFAULT_SQUARES_Z,                                 // bottom right
+            )
+            mSquare?.reinitializeVertexBuffer()
+            mSquare2?.coordinates = floatArrayOf(
+                0.5f, 0.5f, squaresZF ?: DEFAULT_SQUARES_Z,                                 // top left
+                0.6f, 0.5f, squaresZF ?: DEFAULT_SQUARES_Z,                                 // top right
+                0.5f, 0.4f, squaresZF ?: DEFAULT_SQUARES_Z,                                 // bottom left
+                0.6f, 0.4f, squaresZF ?: DEFAULT_SQUARES_Z,                                 // bottom right
+            )
+            mSquare2?.reinitializeVertexBuffer()
         }
     }
 
@@ -170,11 +185,16 @@ open class MyRenderer : GLSurfaceView.Renderer {
                 0.5f, 0.4f, 0.0f                                  // bottom right
             ))
             mSquare = SquareOpenGLObject(it, ContextCompat.getColor(it, R.color.blue).colorToFloatArray(), floatArrayOf(
-                0.4f, 0.5f, 0.0f,
-                0.5f, 0.5f, 0.0f,
-                0.4f, 0.4f, 0.0f,
-                0.5f, 0.4f, 0.0f,
-
+                0.4f, 0.5f, squaresZF ?: DEFAULT_SQUARES_Z,                                 // top left
+                0.5f, 0.5f, squaresZF ?: DEFAULT_SQUARES_Z,                                 // top right
+                0.4f, 0.4f, squaresZF ?: DEFAULT_SQUARES_Z,                                 // bottom left
+                0.5f, 0.4f, squaresZF ?: DEFAULT_SQUARES_Z,                                 // bottom right
+            ))
+            mSquare2 = SquareOpenGLObject(it, ContextCompat.getColor(it, R.color.red).colorToFloatArray(), floatArrayOf(
+                0.5f, 0.5f, squaresZF ?: DEFAULT_SQUARES_Z,       // top left
+                0.6f, 0.5f, squaresZF ?: DEFAULT_SQUARES_Z,       // top right
+                0.5f, 0.4f, squaresZF ?: DEFAULT_SQUARES_Z,       // bottom left
+                0.6f, 0.4f, squaresZF ?: DEFAULT_SQUARES_Z,       // bottom right
             ))
         }
     }
@@ -229,6 +249,14 @@ open class MyRenderer : GLSurfaceView.Renderer {
             updateDrawnObjectCoordinates()
         }
 
+    var squaresZF: Float? = null
+        set(value) {
+            logEvent("`squaresZF` is being written to in MyRenderer.\n" +
+                    "squaresZF: $value")
+            field = value
+            updateDrawnObjectCoordinates()
+        }
+
     private var ratio: Float? = null
 
     override fun onSurfaceChanged(gl: GL10, width: Int, height: Int) {
@@ -271,7 +299,7 @@ open class MyRenderer : GLSurfaceView.Renderer {
             logError("Calculated `ratio` is null...")
         }
 
-        // Set the camera position (View matrix)
+        // Set the camera position (View matrix).
         try {
             Matrix.setLookAtM(
                 viewMatrix,
@@ -291,10 +319,10 @@ open class MyRenderer : GLSurfaceView.Renderer {
             e.printStackTrace()
         }
 
-        // Calculate the projection and view transformation
+        // Calculate the projection and view transformation.
         Matrix.multiplyMM(vPMatrix, 0, projectionMatrix, 0, viewMatrix, 0)
 
-        // Create a rotation transformation for the triangle
+        // Create a rotation transformation for the triangle.
         val time = SystemClock.uptimeMillis() % TIME_FACTOR
         val angleInTime = ANGLE_FACTOR * time.toInt()
 
@@ -308,6 +336,7 @@ open class MyRenderer : GLSurfaceView.Renderer {
         Matrix.setRotateM(rotationMatrix2, 0, angleInTime, 0f, 0f, -1.0f)
 
         val scratch = FloatArray(16)
+
         // Combine the rotation matrix with the projection and camera view
         // Note that the vPMatrix factor *must be first* in order
         // for the matrix multiplication product to be correct.
@@ -323,5 +352,7 @@ open class MyRenderer : GLSurfaceView.Renderer {
         mTriangle2?.draw(scratch)
         mTriangle3?.draw(scratch2)
         mTriangle4?.draw(vPMatrix)
+        mSquare?.draw()
+        mSquare2?.draw()
     }
 }

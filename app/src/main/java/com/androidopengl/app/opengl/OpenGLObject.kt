@@ -19,7 +19,7 @@ abstract class OpenGLObject(
 ) {
 
     fun reinitializeVertexBuffer() {
-        vertexBuffer = initializeVertexBuffer()
+        vertexBuffer.position(0)
     }
 
     private fun initializeVertexBuffer(): FloatBuffer {

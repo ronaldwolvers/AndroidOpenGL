@@ -161,6 +161,35 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/squares_z" />
+
+            <EditText
+                android:id="@+id/edit_text_squares_z_f"
+                android:layout_width="@dimen/edit_text_width"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal|numberSigned"
+                android:maxLines="1"
+                android:minLines="1" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/slider_squares_z_f"
+                android:layout_width="0dp"
+                android:valueFrom="-10.0f"
+                android:valueTo="10.0f"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
         <Button
             android:id="@+id/button_reset_parameters"
             android:layout_marginTop="@dimen/margin_normal"

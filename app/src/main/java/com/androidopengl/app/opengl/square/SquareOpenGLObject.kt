@@ -6,8 +6,13 @@ import com.androidopengl.app.opengl.triangle.TriangleOpenGLObject
 class SquareOpenGLObject (
     private val context: Context? = null,
     private val color: FloatArray,
-    val coordinates: FloatArray
+    var coordinates: FloatArray
 ) {
+
+    fun reinitializeVertexBuffer() {
+        mTriangle1.reinitializeVertexBuffer()
+        mTriangle2.reinitializeVertexBuffer()
+    }
 
     private val mTriangle1: TriangleOpenGLObject =
         TriangleOpenGLObject(context, color, coordinates.sliceArray(0..8))
