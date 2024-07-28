@@ -55,16 +55,8 @@ class MyGLSurfaceView : GLSurfaceView {
         return renderer
     }
 
-    init {
-
-        logEvent("`MyGLSurfaceView.init` is being called...")
-
-        // Create an OpenGL ES 2.0 context.
-        setEGLContextClientVersion(2)
-    }
-
-    private var previousX: Float = 0f
-    private var previousY: Float = 0f
+    private var previousX: Float = 0F
+    private var previousY: Float = 0F
 
     override fun performClick(): Boolean {
         logEvent("`performClick()` is being called...")
@@ -153,24 +145,24 @@ open class MyRenderer : GLSurfaceView.Renderer {
 
         context?.let {
             mTriangle = TriangleOpenGLObject(it, ContextCompat.getColor(it, R.color.purple_200).colorToFloatArray(), floatArrayOf(
-                0.0f, 0.62f, topZF ?: DEFAULT_TOP_Z,              // top
-                -0.5f, -0.31f, 0.0f,                              // bottom left
-                0.5f, -0.31f, 0.0f                                // bottom right
+                0.0F, 0.62F, topZF ?: DEFAULT_TOP_Z,              // top
+                -0.5F, -0.31F, 0.0F,                              // bottom left
+                0.5F, -0.31F, 0.0F                                // bottom right
             ))
             mTriangle2 = TriangleOpenGLObject(it, ContextCompat.getColor(it, R.color.purple_500).colorToFloatArray(), floatArrayOf(
-                0.0f, 0.62f, topZF ?: DEFAULT_TOP_Z,              // top
-                -0.5f, -0.31f, 0.0f,                              // bottom left
-                0.5f, -0.31f, 0.0f                                // bottom right
+                0.0F, 0.62F, topZF ?: DEFAULT_TOP_Z,              // top
+                -0.5F, -0.31F, 0.0F,                              // bottom left
+                0.5F, -0.31F, 0.0F                                // bottom right
             ))
             mTriangle3 = TriangleOpenGLObject(it, ContextCompat.getColor(it, R.color.teal_700).colorToFloatArray(), floatArrayOf(
-                0.0f, 0.3f, topZF ?: DEFAULT_TOP_Z,               // top
-                -0.3f, -0.11f, 0.0f,                              // bottom left
-                0.3f, -0.11f, 0.0f                                // bottom right
+                0.0F, 0.3F, topZF ?: DEFAULT_TOP_Z,               // top
+                -0.3F, -0.11F, 0.0F,                              // bottom left
+                0.3F, -0.11F, 0.0F                                // bottom right
                 ))
             mTriangle4 = TriangleOpenGLObject(it, ContextCompat.getColor(it, R.color.teal_200).colorToFloatArray(), floatArrayOf(
-                0.5f, 0.5f, topZF ?: DEFAULT_TOP_Z,               // top
-                0.4f, 0.4f, 0.0f,                                 // bottom left
-                0.5f, 0.4f, 0.0f                                  // bottom right
+                0.5F, 0.5F, topZF ?: DEFAULT_TOP_Z,               // top
+                0.4F, 0.4F, 0.0F,                                 // bottom left
+                0.5F, 0.4F, 0.0F                                  // bottom right
             ))
         }
     }
@@ -254,8 +246,8 @@ open class MyRenderer : GLSurfaceView.Renderer {
                     0,
                     -ratio!!,
                     ratio!!,
-                    -1f,
-                    1f,
+                    -1F,
+                    1F,
                     frustumNearF ?: DEFAULT_NEAR_F,
                     frustumFarF ?: DEFAULT_FAR_F
                 )
@@ -272,15 +264,15 @@ open class MyRenderer : GLSurfaceView.Renderer {
             Matrix.setLookAtM(
                 viewMatrix,
                 0,
-                0f,
+                0F,
                 eyeYF ?: DEFAULT_EYE_Y_F,
                 eyeZF ?: DEFAULT_EYE_Z_F,
-                0f,
-                0f,
-                0f,
-                0f,
+                0F,
+                0F,
+                0F,
+                0F,
                 upYF ?: DEFAULT_UP_Y_F,
-                0.0f
+                0.0F
             )
         } catch (e: Exception) {
             logError("Something went wrong while calling Matrix.setLookAtM(): ${e.message}")
@@ -299,9 +291,9 @@ open class MyRenderer : GLSurfaceView.Renderer {
                     "angle: $angleInTime"
         )
 
-        Matrix.setRotateM(rotationMatrix, 0, angle, 0f, 0f, -1.0f)
+        Matrix.setRotateM(rotationMatrix, 0, angle, 0F, 0F, -1.0F)
 
-        Matrix.setRotateM(rotationMatrix2, 0, angleInTime, 0f, 0f, -1.0f)
+        Matrix.setRotateM(rotationMatrix2, 0, angleInTime, 0F, 0F, -1.0F)
 
         val scratch = FloatArray(16)
         // Combine the rotation matrix with the projection and camera view
