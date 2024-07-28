@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    compileSdk 35
+    compileSdk 34
 
     buildFeatures {
         viewBinding true
@@ -13,7 +13,8 @@ android {
     defaultConfig {
         applicationId "com.androidopengl.app"
         minSdk 21
-        targetSdk 35
+        //noinspection OldTargetApi TODO: Upgrade `targetSdk` when a new AGP version is released.
+        targetSdk 34
         versionCode 2
         versionName "1.0"
         buildConfigField "Boolean", "enableLogging", "false"
@@ -35,6 +36,10 @@ android {
         jvmTarget = '17'
     }
     namespace 'com.androidopengl.app'
+
+    buildFeatures {
+        buildConfig true
+    }
 }
 
 dependencies {

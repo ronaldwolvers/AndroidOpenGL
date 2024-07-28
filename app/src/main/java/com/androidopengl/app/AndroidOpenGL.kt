@@ -1,7 +1,6 @@
 package com.androidopengl.app
 
 import android.app.Application
-import android.os.Build
 import android.util.Log
 
 const val ANDROID_OPENGL_LOGGING_TAG = "AndroidOpenGL"
