@@ -58,6 +58,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        supportActionBar?.hide()
+
         glSurfaceView = findViewById(R.id.gl_surface_view)
 
         glSurfaceView.setEGLContextFactory(object: GLSurfaceView.EGLContextFactory {
