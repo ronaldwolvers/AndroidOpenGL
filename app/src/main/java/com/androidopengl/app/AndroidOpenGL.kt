@@ -1,19 +1,23 @@
 package com.androidopengl.app
 
 import android.app.Application
+import android.os.Build
 import android.util.Log
 
 const val ANDROID_OPENGL_LOGGING_TAG = "AndroidOpenGL"
 
 fun logWarning(warning: String) {
+    if (!BuildConfig.enableLogging) return
     Log.w(ANDROID_OPENGL_LOGGING_TAG, warning)
 }
 
 fun logError(error: String) {
+    if (!BuildConfig.enableLogging) return
     Log.e(ANDROID_OPENGL_LOGGING_TAG, error)
 }
 
 fun logEvent(event: String) {
+    if (!BuildConfig.enableLogging) return
     Log.i(ANDROID_OPENGL_LOGGING_TAG, event)
 }
 
