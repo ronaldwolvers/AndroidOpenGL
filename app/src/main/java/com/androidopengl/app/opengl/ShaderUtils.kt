@@ -9,6 +9,7 @@ import com.androidopengl.app.utils.convertInputStreamToString
 import java.io.IOException
 import java.io.InputStream
 
+@Suppress("unused")
 fun loadShader(type: Int, shaderCode: String): Int {
 
     logEvent(event = "loadShader() is being called...\n" +

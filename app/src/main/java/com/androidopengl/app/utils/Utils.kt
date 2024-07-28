@@ -49,12 +49,14 @@ fun createBitmapFromCharSequence(
     return bitmap
 }
 
+@Suppress("unused")
 fun Int.dp2px(context: Context): Int {
     return TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP, toFloat(), context.resources.displayMetrics
     ).toInt()
 }
 
+@Suppress("unused")
 fun Int.px2dp(context: Context): Int {
     return (this / context.resources.displayMetrics.density).roundToInt()
 }
@@ -95,7 +97,7 @@ fun convertInputStreamToString(inputStream: InputStream): String {
     var charsRead: Int
     inputStream.use {
         while (`in`.read(buffer, 0, buffer.size).also { charsRead = it } > 0) {
-            out.append(buffer, 0, charsRead)
+            out.appendRange(buffer, 0, charsRead)
         }
     }
 

@@ -16,6 +16,7 @@ import com.androidopengl.app.utils.createBitmapFromCharSequence
 
 private const val DEFAULT_TEXTSIZE: Float = 60F
 
+@Suppress("unused")
 class CharSequenceOpenGLObject(
     private val context: Context,
     coordinates: FloatArray,

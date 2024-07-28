@@ -19,11 +19,8 @@ import javax.microedition.khronos.opengles.GL10
 
 //Use only values that fit inside an `int` as opposed to a `float` or the app will crash.
 private const val DEFAULT_BACKGROUND_COLOR = 0xFFFFFFFF
-
-private const val TOUCH_SCALE_FACTOR: Float = 180.0f / 320.0f
-
+private const val TOUCH_SCALE_FACTOR: Float = 180.0F / 320.0F
 private const val TIME_FACTOR: Long = 4000L
-
 private const val ANGLE_FACTOR: Float = 0.09F
 
 class MyGLSurfaceView : GLSurfaceView {
@@ -32,12 +29,12 @@ class MyGLSurfaceView : GLSurfaceView {
 
     constructor(context: Context) : super(context) {
         this.context = context
-        logEvent("MyGLSurfaceView(context) is being called...")
+        logEvent("`MyGLSurfaceView(context)` is being called...")
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         this.context = context
-        logEvent("MyGLSurfaceView(context, attrs) is being called...")
+        logEvent("`MyGLSurfaceView(context, attrs)` is being called...")
     }
 
     private var renderer: Renderer? = null
@@ -60,7 +57,7 @@ class MyGLSurfaceView : GLSurfaceView {
 
     init {
 
-        logEvent("MyGLSurfaceView.init is being called...")
+        logEvent("`MyGLSurfaceView.init` is being called...")
 
         // Create an OpenGL ES 2.0 context.
         setEGLContextClientVersion(2)
@@ -69,9 +66,14 @@ class MyGLSurfaceView : GLSurfaceView {
     private var previousX: Float = 0f
     private var previousY: Float = 0f
 
+    override fun performClick(): Boolean {
+        logEvent("`performClick()` is being called...")
+        return super.performClick()
+    }
+
     override fun onTouchEvent(e: MotionEvent): Boolean {
 
-        logEvent( "MyGLSurfaceView.onTouchEvent() is being called...")
+        logEvent( "`MyGLSurfaceView.onTouchEvent()` is being called...")
 
         // MotionEvent reports input details from the touch screen
         // and other input controls. In this case, you are only
@@ -99,6 +101,9 @@ class MyGLSurfaceView : GLSurfaceView {
                     (renderer as MyRenderer).angle += (dx + dy) * TOUCH_SCALE_FACTOR
                 }
                 requestRender()
+            }
+            MotionEvent.ACTION_UP -> {
+                performClick()
             }
         }
 
@@ -140,7 +145,7 @@ open class MyRenderer : GLSurfaceView.Renderer {
 
     override fun onSurfaceCreated(gl: GL10, config: EGLConfig) {
 
-        logEvent("onSurfaceCreated() is being called...")
+        logEvent("`onSurfaceCreated()` is being called...")
 
         // Set the background frame color.
         val backGroundColor = DEFAULT_BACKGROUND_COLOR.toInt().colorToFloatArray()

@@ -60,6 +60,7 @@ abstract class OpenGLObject(
             }
         }
 
+    @Suppress("unused")
     fun loadTexture(textureResourceId: Int): Int {
         val textureHandles = IntArray(1)
         GLES20.glGenTextures(1, textureHandles, 0)

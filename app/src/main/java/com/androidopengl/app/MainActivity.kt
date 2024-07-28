@@ -8,13 +8,14 @@ import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import com.google.android.material.slider.Slider
+import java.util.Locale
 import javax.microedition.khronos.egl.EGL10
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.egl.EGLContext
 import javax.microedition.khronos.egl.EGLDisplay
 
-@Suppress("unused")
 enum class RenderMode(val renderMode: Int) {
+    @Suppress("unused")
     RENDERMODE_WHEN_DIRTY(GLSurfaceView.RENDERMODE_WHEN_DIRTY),
     RENDERMODE_CONTINUOUSLY(GLSurfaceView.RENDERMODE_CONTINUOUSLY)
 }
@@ -142,7 +143,7 @@ class MainActivity : AppCompatActivity() {
         eyeYFSlider = findViewById(R.id.slider_eye_z_f)
         eyeYFSlider.value = DEFAULT_EYE_Y_F
         eyeYFSlider.addOnChangeListener(Slider.OnChangeListener { _, value, _ ->
-            eyeYF.setText(String.format("%.1f", value))
+            eyeYF.setText(String.format(Locale.getDefault(), "%.1f", value))
         })
 
         eyeZF = findViewById(R.id.edit_text_eye_z_f)
@@ -172,7 +173,7 @@ class MainActivity : AppCompatActivity() {
         topZFSlider = findViewById(R.id.slider_top_z_f)
         topZFSlider.value = DEFAULT_TOP_Z
         topZFSlider.addOnChangeListener(Slider.OnChangeListener { _, value, _ ->
-            topZF.setText(String.format("%.1f", value))
+            topZF.setText(String.format(Locale.getDefault(), "%.1f", value))
         })
 
         resetParametersButton = findViewById(R.id.button_reset_parameters)
