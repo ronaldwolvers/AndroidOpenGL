@@ -17,4 +17,8 @@ fun logEvent(event: String) {
     Log.i(ANDROID_OPENGL_LOGGING_TAG, event)
 }
 
+const val EGL_CONTEXT_CLIENT_VERSION = 0x3098
+const val PREFERRED_OPENGL_VERSION = 3.2
+const val FALLBACK_OPENGL_VERSION = 2.0
+
 class AndroidOpenGL: Application()

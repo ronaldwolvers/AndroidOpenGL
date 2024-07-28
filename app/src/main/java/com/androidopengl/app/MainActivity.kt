@@ -8,6 +8,10 @@ import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import com.google.android.material.slider.Slider
+import javax.microedition.khronos.egl.EGL10
+import javax.microedition.khronos.egl.EGLConfig
+import javax.microedition.khronos.egl.EGLContext
+import javax.microedition.khronos.egl.EGLDisplay
 
 @Suppress("unused")
 enum class RenderMode(val renderMode: Int) {
@@ -54,6 +58,34 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         glSurfaceView = findViewById(R.id.gl_surface_view)
+
+        glSurfaceView.setEGLContextFactory(object: GLSurfaceView.EGLContextFactory {
+
+            override fun createContext(egl10: EGL10, eglDisplay: EGLDisplay, eglConfig: EGLConfig): EGLContext {
+                var openGlContext = egl10.eglCreateContext(
+                    eglDisplay,
+                    eglConfig,
+                    EGL10.EGL_NO_CONTEXT,
+                    intArrayOf(EGL_CONTEXT_CLIENT_VERSION, PREFERRED_OPENGL_VERSION.toInt(), EGL10.EGL_NONE)
+                )
+
+                if (openGlContext == null) {
+                    openGlContext = egl10.eglCreateContext(
+                        eglDisplay,
+                        eglConfig,
+                        EGL10.EGL_NO_CONTEXT,
+                        intArrayOf(EGL_CONTEXT_CLIENT_VERSION, FALLBACK_OPENGL_VERSION.toInt(), EGL10.EGL_NONE)
+                    )
+                }
+
+                return openGlContext
+            }
+
+            override fun destroyContext(egl10: EGL10, eglDisplay: EGLDisplay, eglContext: EGLContext?) {
+                egl10.eglDestroyContext(eglDisplay, eglContext)
+            }
+
+        })
 
         if (glSurfaceView.getRenderer() == null) {
             myRenderer = MyRenderer()
